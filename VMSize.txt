@@ -1,1 +1,9 @@
-Get-AzVM -Name $vmname 
+$vm = Get-AzVM -Name thinkvm-win01 -ResourceGroupName $RG
+
+### PS /home/mahesh> Get-AzVM -Name thinkvm-win01 -ResourceGroupName $RG 
+HardwareProfile    : {VmSize}
+NetworkProfile     : {NetworkInterfaces}  ######
+
+$vm.HardwareProfile.VmSize = 'Standard_DS2_v3' 
+
+Update-AzVM -vm $VM -ResourceGroupName $RG
