@@ -1,0 +1,14 @@
+
+PS D:\Azure DevOps Training\AZ-103 Admin\Exercises> Connect-AzAccount
+
+$RG = 'compute-win'
+$RGL = 'eastus'
+$vmname = 'thinkvm-win'
+
+$cred = Get-Credential -Message 'Enter un and pwd for the VM'
+
+***$nic = New-AzNetworkInterface -Name myNic -ResourceGroupName $RG -Location $RGL -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id -NetworkSecurityGroupId $nsg.Id
+
+$vmConfig = New-AzVMConfig -VMName $vmName -VMSize Standard_DS1_v2 | Set-AzVMOperatingSystem -Windows -ComputerName $vmName -Credential $cred | Set-AzVMSourceImage -PublisherName MicrosoftWindowsServer -Offer WindowsServer -Skus 2016-Datacenter -Version latest | Add-AzVMNetworkInterface -Id $nic.Id
+
+New-AzVM -ResourceGroupName $RG -Location $RGL -VM $vmConfig

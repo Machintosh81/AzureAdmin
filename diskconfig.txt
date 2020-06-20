@@ -1,0 +1,15 @@
+$RG = 'compute-win'
+$location = (Get-AzResourceGroup -name compute-win).location
+$vmname = (Get-AzVM -name thinkvm*).Name
+
+$diskconfig = New-AzDiskConfig -Location $location -DiskSizeGB 32 -sku Standard_LRS -createOption Empty 
+
+$datadisk = New-AzDisk -resourcegroupname $RG -DiskName thinkvm-win-datadisk -Disk $diskconfig
+
+$vm = Get-AzVM -Name $vmname -resourcegroupname $RG
+
+Add-AzVMDataDisk -VM $vm -Name $datadisk.Name -createOption Attach -ManagedDiskId $datadisk.Id -Lun 1
+
+Update-AzVM -VM $vm -ResourceGroupName $RG  
+
+
