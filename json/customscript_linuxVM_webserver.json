@@ -1,4 +1,4 @@
 {
     "fileuris": ["https://raw.githubusercontent.com/Machintosh81/AzureAdmin/master/Linux/install_web.sh"],
-    "commandtoexecute": "./install_web.sh"
+    "commandToExecute": "./install_web.sh"
 }
